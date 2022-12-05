@@ -1,0 +1,16 @@
+.ag-theme-material {
+  --ag-foreground-color: rgb(0, 0, 0);
+  --ag-background-color: #e3f2fd;
+  --ag-header-foreground-color: #e3f2fd;
+  --ag-header-background-color: #42a5f5;
+  --ag-header-cell-hover-background-color: #0288d1;
+  --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
+  --ag-header-column-resize-handle-color: rgb(126, 46, 132);
+}
+.ag-theme-material .ag-header-cell {
+  font-size: 16px;
+}
+
+.ag-theme-material .ag-header-cell-label {
+  justify-content: center;
+}

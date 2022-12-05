@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import Snackbar from '@mui/material/Snackbar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import MuiAlert from '@mui/material/Alert';
 import moment from 'moment';
-// import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import AddTodo from './AddTodo';
@@ -18,6 +16,7 @@ import Calendar from './Calendar';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
+import '../styles/styles.css';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -27,16 +26,6 @@ function TodoList() {
   const [todo, setTodo] = useState([]);
   const [msg, setMsg] = useState('');
   const [open, setOpen] = useState(false);
-  // const [update, setUpdate] = useState(false);
-  const [gridApi, setGridApi] = useState(null);
-
-  const onGridReady = (params) => {
-    setGridApi(params.api);
-  };
-
-  const onBtnExport = () => {
-    gridApi.exportDataAsCsv();
-  };
 
   useEffect(() => {
     getTodos();
@@ -103,9 +92,18 @@ function TodoList() {
   };
 
   const columns = [
-    { field: 'title', sortable: true, filter: true, floatingFilter: true },
     {
+      headerName: ' Todo title',
+      field: 'title',
+      cellStyle: { fontSize: '16px' },
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+    },
+    {
+      headerName: ' Date & Time',
       field: 'date',
+      cellStyle: { fontSize: '16px' },
       sortable: true,
       filter: true,
       floatingFilter: true,
@@ -114,7 +112,9 @@ function TodoList() {
       },
     },
     {
+      headerName: 'Description',
       field: 'description',
+      cellStyle: { fontSize: '16px' },
       sortable: true,
       filter: true,
       floatingFilter: true,
@@ -122,7 +122,7 @@ function TodoList() {
     {
       headerName: '',
       field: '_id',
-      width: 70,
+      width: 60,
       cellRenderer: (params) => (
         <UpdateTodo updateTodo={updateTodo} params={params} />
       ),
@@ -130,7 +130,7 @@ function TodoList() {
     {
       headerName: '',
       field: '_id',
-      width: 70,
+      width: 60,
       cellRenderer: (params) => (
         <Tooltip title="Delete">
           <IconButton
@@ -149,23 +149,31 @@ function TodoList() {
     <React.Fragment>
       <Box
         sx={{
+          marginLeft: 64,
+          marginRight: 64,
           display: 'flex',
           padding: 1,
           justifyContent: 'space-around',
         }}
       >
         <AddTodo addTodo={addTodo} />
-        <Button
-          style={{ marginTop: 4, marginLeft: 1 }}
-          startIcon={<FileDownloadIcon />}
-          onClick={() => onBtnExport()}
+        <Typography
+          variant="h4"
+          noWrap
+          component="div"
+          sx={{
+            mr: 2,
+            color: 'rgb(0, 0, 0)',
+            display: { xs: 'none', md: 'flex' },
+          }}
         >
-          Download CSV
-        </Button>
+          Todo app
+        </Typography>
+        <Calendar />
       </Box>
       <div
         className="ag-theme-material"
-        style={{ height: 660, width: '60%', margin: 'auto' }}
+        style={{ height: 650, width: '38%', margin: 'auto' }}
       >
         <AgGridReact
           rowData={todo}
@@ -174,9 +182,9 @@ function TodoList() {
           pagination={true}
           paginationPageSize={10}
           suppressCellFocus={true}
-          suppressExcelExport={true}
-          onGridReady={onGridReady}
           suppressRowHoverHighlight={true}
+          floatingFiltersHeight={40}
+          headerHeight={40}
         />
       </div>
       <Snackbar

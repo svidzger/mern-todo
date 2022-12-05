@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import UpdateIcon from '@mui/icons-material/Update';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Tooltip from '@mui/material/Tooltip';
@@ -49,7 +49,7 @@ function UpdateTodo(props) {
     <React.Fragment>
       <Tooltip title="Update todo">
         <IconButton color="primary" size="small" onClick={handleClickOpen}>
-          <UpdateIcon />
+          <ChangeCircleIcon />
         </IconButton>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
