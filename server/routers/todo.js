@@ -1,7 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
 
+// Mongoose querying logic import
 const {
   getAllTodos,
   createTodo,
@@ -9,35 +9,16 @@ const {
   deleteTodo,
 } = require('../controllers/todo');
 
-/**
- * @route GET api/todo
- * @description get all todos
- * @access public
- */
-
+// Get all todos. Route GET api/todo.
 router.get('/', getAllTodos);
 
-/**
- * @route POST api/todo
- * @description Add a new TODO
- * @access public
- */
-
+// Create a new todo. Route POST api/todo.
 router.post('/', createTodo);
 
-/**
- * @route PUT api/todo/:id
- * @description update todo
- * @access public
- */
+// Find and update todo by id. Route PUT todo/api/:id.
 router.put('/:id', updateTodo);
 
-/**
- * @route DELETE api/todo/:id
- * @description delete todo by id
- * @access public
- */
-
+// Find and delete todo by id. Route DELETE todo/api/:id.
 router.delete('/:id', deleteTodo);
 
 module.exports = router;

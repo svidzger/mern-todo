@@ -31,6 +31,7 @@ function TodoList() {
     getTodos();
   }, []);
 
+  // Get all todos
   const getTodos = () => {
     axios
       .get('http://localhost:8000/api/todo')

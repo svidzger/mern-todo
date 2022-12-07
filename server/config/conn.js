@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const connectMongo = async () => {
+const connectMongo = () => {
   try {
-    await mongoose.connect(process.env.ATLAS_URI, {
+    mongoose.connect(process.env.ATLAS_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

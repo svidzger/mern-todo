@@ -1,9 +1,10 @@
+// Todo mongoose model
 const Todo = require('../models/todo');
 
+// Show all todos
 exports.getAllTodos = (req, res) => {
   Todo.find()
     .then((todo) => {
-      console.log({ todo });
       res.json(todo);
     })
     .catch((err) =>
@@ -11,11 +12,11 @@ exports.getAllTodos = (req, res) => {
     );
 };
 
+// Create a new todo
 exports.createTodo = (req, res) => {
   Todo.create(req.body)
-    .then((data) => {
-      console.log({ data });
-      res.json({ message: 'Todo added successfully!', data });
+    .then((todo) => {
+      res.json({ message: 'Todo added successfully!', todo });
     })
     .catch((err) =>
       res.status(400).json({
@@ -25,12 +26,10 @@ exports.createTodo = (req, res) => {
     );
 };
 
+// Update existing todo
 exports.updateTodo = (req, res) => {
-  console.log('id: ', req.params.id);
-  console.log('body: ', req.body);
   Todo.findByIdAndUpdate(req.params.id, req.body)
     .then((todo) => {
-      console.log('edit', { todo });
       return res.json({ message: 'Todo updated successfully!', todo });
     })
     .catch((err) =>
@@ -40,13 +39,15 @@ exports.updateTodo = (req, res) => {
     );
 };
 
+// Delete todo
 exports.deleteTodo = (req, res) => {
   Todo.findByIdAndRemove(req.params.id, req.body)
     .then((todo) => {
-      console.log('delete', { todo });
       return res.json({ message: 'Todo deleted successfully!', todo });
     })
     .catch((err) =>
-      res.status(404).json({ error: 'Todo not found!', message: err.message })
+      res
+        .status(404)
+        .json({ error: 'Failed to delete todo!', message: err.message })
     );
 };
